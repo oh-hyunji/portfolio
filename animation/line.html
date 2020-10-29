@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>line animation</title>
+    <style>
+        body {
+            height: 100vh;
+            background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+        }
+        .common {
+            width: 5px;
+            height: 400px;
+            position: absolute;
+            left: 0; right: 0; top: 0; bottom: 0;
+            margin: auto;
+        }
+        .bar {
+            /* animation-name: bar;
+            animation-duration: 2s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: 100; */
+            background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+            animation: bar 2s ease 100;
+        }
+        .bar2 {
+            background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
+            animation: bar2 2s ease 100;
+        }
+        .bar3 {
+            background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+            animation: bar3 2s ease 100;
+        }
+        .bar4 {
+            background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
+            animation: bar4 2s ease 100;
+        }
+        @keyframes bar {
+            0% {transform: rotate(0); height: 0;}
+            25% {transform: rotate(0); height: 300px;}
+            50% {transform: rotate(180deg); height: 300px;}
+            100% {transform: rotate(180deg); height: 0;}
+        }
+        @keyframes bar2 {
+            0% {transform: rotate(45deg); height: 0;}
+            25% {transform: rotate(45deg); height: 300px;}
+            50% {transform: rotate(225deg); height: 300px;}
+            100% {transform: rotate(225deg); height: 0;}
+        }
+        @keyframes bar3 {
+            0% {transform: rotate(90deg); height: 0;}
+            25% {transform: rotate(90deg); height: 300px;}
+            50% {transform: rotate(270deg); height: 300px;}
+            100% {transform: rotate(270deg); height: 0;}
+        }
+        @keyframes bar4 {
+            0% {transform: rotate(135deg); height: 0;}
+            25% {transform: rotate(135deg); height: 300px;}
+            50% {transform: rotate(315deg); height: 300px;}
+            100% {transform: rotate(315deg); height: 0;}
+        }
+    </style>
+</head>
+<body>
+    <div class="common bar"></div>
+    <div class="common bar2"></div>
+    <div class="common bar3"></div>
+    <div class="common bar4"></div>
+</body>
+</html>

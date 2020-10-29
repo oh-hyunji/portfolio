@@ -2,6 +2,7 @@
 
 /* reset */
 * {box-sizing:border-box; cursor: none;}
+*:focus {outline:none;}​ 
 html,body{ margin:0; padding:0; width:100%; height:100%;}
 p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select {margin:0; padding:0;}
 body,input,textarea,select,button,table {font-family:'Noto Sans','나눔고딕',NanumGothic,Malgun Gothic,'돋움',Dotum,helvetica,arial,sans-serif; font-style: normal; font-weight: normal; font-size:14px;}
@@ -16,12 +17,6 @@ button {cursor:pointer;}
 
 /* font set */
 .han {font-family: 'Noto Sans KR', sans-serif; font-style: normal; font-weight: normal; letter-spacing: -0.1em;}
-
-/* IE10+ : ie cross browsing css*/
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-    .text_stroke {color: #fff !important; text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;}
-    .ie_color {color: rgba(236, 236, 236, 1) !important;}
-}
 
 #cursor {
     position: fixed;

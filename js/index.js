@@ -219,40 +219,30 @@ $(function() {
         $('html, body').animate({scrollTop : offset.top}, 400);
     });
 
-    // hover animate & cursor
-    $('.he_mail, .navi_box, .fo_top, .document, .pr_pre, .pr_next, .fo_gmail, .sa_box').mouseenter(function() {
-        var className = $(this).attr('class').split(' ');
-        
-        if(className[0] !== 'pr_pre' && className[0] !== 'pr_next' && className[0] !== 'sa_box'){
-            $('#cursor .blob').animate({'width':'45px','height':'45px'}, 500);
-        }
+    // animate & cursor
+    $('.he_mail, .navi_box, .fo_top, .document, .pr_pre, .pr_next, .link_box, .fo_gmail, .open_bt, .close_bt').mouseenter(function() {
+        $('#cursor .blob').css({'width':'45px','height':'45px'});
        
+        var className = $(this).attr('class').split(' ');
         switch(className[0]){
-            case 'document':
-                $('#cursor .blob').css({'border':'2px solid #ffd487'});
-                break;
             case 'pr_pre':
-                $('#cursor .blob').animate({'width':'200px','height':'200px'}, 300);
-                break;
             case 'pr_next':
-                $('#cursor .blob').animate({'width':'200px','height':'200px'}, 300);
+                $('#cursor .blob').css({'width':'200px','height':'200px'});
                 break;
-            case 'sa_box':
-                $('#cursor .blob').animate({'width':'60px','height':'60px'}, 300);
+            case 'link_box':
+                $('#cursor .blob').css({'width':'120px','height':'120px'});
                 break;
             case 'fo_gmail':
                 $('#cursor .blob').css({'border':'2px solid #ffd487'});
-                $('#cursor .blob').animate({'width':'80px','height':'80px'}, 500);
+                $('#cursor .blob').css({'width':'80px','height':'80px'});
                 break;
         }
-
+       
         $('#cursor .blob').css({'background-color':'transparent'});
     }).mouseleave(function(){
-        $('#cursor .blob').animate({'width':'30px','height':'30px'}, 100);
+        $('#cursor .blob').css({'width':'30px','height':'30px'});
         $('#cursor .blob').css({'background-color':'#ffb924', 'border':'2px solid #ffb734'});
     });
-
-   
 
     var page = 1;
     $('.pr_pre, .pr_next').on('click', function(){
@@ -272,6 +262,15 @@ $(function() {
 
         var select1 = ($this == 'pr_next') ? select_pr : select_ne;
         var select2 = ($this == 'pr_next') ? select_ne : select_pr;
+
+        if($this == 'pr_pre' && page <= 1) {
+            alert('이전 프로젝트가 없습니다.');
+            return;
+        }
+        if($this == 'pr_next' && page >= 4) {
+            alert('다음 프로젝트가 없습니다.');
+            return;
+        }
        
         $(page1).removeClass('pa_on');
         $(page2).addClass('pa_on');
@@ -284,6 +283,60 @@ $(function() {
 
         if($this == 'pr_next') page++;
         else page--;
+    });
+
+    var link;
+    $('.link_box').on('click', function(){
+        var dataNum = $(this).data('view');
+
+        var src, title, text;
+        switch(dataNum){
+            case '01':
+                src = 'cube';
+                link = 'eYZrpqw'
+                title = 'CUBE<br>ANIMATION';
+                text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
+                break;
+            case '02':
+                src = 'wave';
+                link = 'XWdqmjy'
+                title = 'WAVE<br>ANIMATION';
+                text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
+                break;
+            case '03':
+                src = 'line';
+                link = 'zYqRgqB'
+                title = 'LINE<br>ANIMATION';
+                text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
+                break;
+            case '04':
+                src = 'loding';
+                link = 'yLJbJzW'
+                title = 'LODING<br>ANIMATION';
+                text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
+                break;
+        }
+
+        $('.la_title').html(title);
+        $('.la_text').html(text);
+
+        var iframeSrc = './animation/'+ src +'.html';
+        $('.iframe').attr('src',iframeSrc);
+
+        $('.layer_pop').css('display','flex');
+        $('.iframe').show();
+    });
+
+    $('.open_bt').on('click', function(e){
+        e.stopPropagation();
+       
+        var url = 'https://codepen.io/oh-hyunji/pen/' + link;
+        window.open(url);
+    });
+
+    $('.layer_pop, .close_bt').on('click', function(){
+        $('.layer_pop').hide();
+        $('.iframe').hide();
     });
 });
 
