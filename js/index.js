@@ -245,6 +245,7 @@ $(function() {
     });
 
     var page = 1;
+    var contNum = $('.pr_content').length;
     $('.pr_pre, .pr_next').on('click', function(){
         var $this = $(this).attr('class');
 
@@ -267,7 +268,7 @@ $(function() {
             alert('이전 프로젝트가 없습니다.');
             return;
         }
-        if($this == 'pr_next' && page >= 4) {
+        if($this == 'pr_next' && page >= contNum) {
             alert('다음 프로젝트가 없습니다.');
             return;
         }

@@ -167,9 +167,9 @@
 #section3 {position: relative;}
 
 .page_box {display: flex; justify-content: center; align-items: center; position: absolute; top: 0; left: 50%; transform: translateX(-50%); opacity: 0;}
-.page {width: 90px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap;}
-.pa_line {height: 50px; width: 1px; background: #999;}
-.page p {width: 100%; padding: 8px 0; text-align: center; font-size: 16px; font-weight: bold; color: #999;}
+.page {width: 75px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap;}
+.pa_line {height: 30px; width: 1px; background: #999;}
+.page p {width: 100%; padding: 10px 0; text-align: center; font-size: 16px; font-weight: bold; color: #999;}
 .pa_on .pa_line {background: #333;}
 .pa_on p {color: #333;}
 
