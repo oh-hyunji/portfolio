@@ -1,4 +1,5 @@
 var port = port || (function () {
+    // typing effect
     var typingBool = false; 
     var typingIdx = 0; 
     var liIndex = 0;
@@ -14,7 +15,6 @@ var port = port || (function () {
         var tyInt = setInterval(typing,150); 
     } 
 
-    // typing effect
 	function typing(){
         $(".title_box h1").removeClass("on");
         $(".title_box h1").eq(liIndex).addClass("on");
@@ -244,6 +244,7 @@ $(function() {
         $('#cursor .blob').css({'background-color':'#ffb924', 'border':'2px solid #ffb734'});
     });
 
+    // web project slide control
     var page = 1;
     var contNum = $('.pr_content').length;
     $('.pr_pre, .pr_next').on('click', function(){
@@ -286,42 +287,54 @@ $(function() {
         else page--;
     });
 
-    var link;
+    // script & animation section layer popup control
+    var link, type;
     $('.link_box').on('click', function(){
         var dataNum = $(this).data('view');
 
         var src, title, text;
+        type = 'animation';
         switch(dataNum){
             case '01':
                 src = 'cube';
-                link = 'eYZrpqw'
+                link = 'eYZrpqw';
                 title = 'CUBE<br>ANIMATION';
                 text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
                 break;
             case '02':
                 src = 'wave';
-                link = 'XWdqmjy'
+                link = 'XWdqmjy';
                 title = 'WAVE<br>ANIMATION';
                 text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
                 break;
             case '03':
                 src = 'line';
-                link = 'zYqRgqB'
+                link = 'zYqRgqB';
                 title = 'LINE<br>ANIMATION';
                 text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
                 break;
             case '04':
                 src = 'loding';
-                link = 'yLJbJzW'
+                link = 'yLJbJzW';
                 title = 'LODING<br>ANIMATION';
+                text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
+                break;
+            case '05':
+                type = 'script';
+                src = 'memo';
+                link = 'script-memo';
+                title = 'JQUERY<br>SIMPLE MEMO';
                 text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
                 break;
         }
 
+        var linkName = (type == 'script') ? 'GIT-HUB' : 'CODE-PEN'
+
         $('.la_title').html(title);
         $('.la_text').html(text);
+        $('.open_bt').html(linkName);
 
-        var iframeSrc = './animation/'+ src +'.html';
+        var iframeSrc = './'+ type +'/'+ src +'.html';
         $('.iframe').attr('src',iframeSrc);
 
         $('.layer_pop').css('display','flex');
@@ -331,7 +344,8 @@ $(function() {
     $('.open_bt').on('click', function(e){
         e.stopPropagation();
        
-        var url = 'https://codepen.io/oh-hyunji/pen/' + link;
+        var host = (type == 'script') ? 'https://github.com/oh-hyunji/' : 'https://codepen.io/oh-hyunji/pen/';
+        var url = host + link;
         window.open(url);
     });
 
@@ -346,6 +360,7 @@ $(function() {
 window.onload = function () {
     $("html, body").animate({ scrollTop: 0 }, "slow"); 
 
+    // snap scroll control
     var elm = ".wheelBox";
     $(elm).each(function (index) {
         // 개별적으로 Wheel 이벤트 적용
