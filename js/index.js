@@ -74,9 +74,9 @@ var port = port || (function () {
             } else {
                 var cntPer = cnt + '%';
                 if(cnt <= 90) $(".sk_content .sk_box:nth-child(1) .sk_right strong").text(cntPer);
-                if(cnt <= 82) $(".sk_content .sk_box:nth-child(2) .sk_right strong").text(cntPer);
-                if(cnt <= 84) $(".sk_content .sk_box:nth-child(3) .sk_right strong").text(cntPer);
-                if(cnt <= 86) $(".sk_content .sk_box:nth-child(4) .sk_right strong").text(cntPer);
+                if(cnt <= 84) $(".sk_content .sk_box:nth-child(2) .sk_right strong").text(cntPer);
+                if(cnt <= 86) $(".sk_content .sk_box:nth-child(3) .sk_right strong").text(cntPer);
+                if(cnt <= 84) $(".sk_content .sk_box:nth-child(4) .sk_right strong").text(cntPer);
                 if(cnt <= 78) $(".sk_content .sk_box:nth-child(5) .sk_right strong").text(cntPer);
                 if(cnt <= 74) $(".sk_content .sk_box:nth-child(6) .sk_right strong").text(cntPer);
             }
@@ -86,9 +86,9 @@ var port = port || (function () {
     // section2 graphUp
     function graphUp(){
         $('.per_html').animate({width:'90%'}, 2000);   
-        $('.per_css').animate({width:'82%'}, 2000);   
-        $('.per_js').animate({width:'84%'}, 2000);   
-        $('.per_php').animate({width:'86%'}, 2000);   
+        $('.per_css').animate({width:'84%'}, 2000);   
+        $('.per_js').animate({width:'86%'}, 2000);   
+        $('.per_php').animate({width:'84%'}, 2000);   
         $('.per_psd').animate({width:'78%'}, 2000);   
         $('.per_ai').animate({width:'74%'}, 2000);   
     }
@@ -99,6 +99,7 @@ var port = port || (function () {
             $('.pr_left').animate({opacity:1}, 1000, function(){
                 $('.pr_style').addClass('pr_style_ani');
                 $('.pr_right img').animate({'margin-left':0}, 1200, function(){
+                    $('.pr_img_text').animate({opacity:1}, 800);
                     $('.page_box').animate({opacity:1}, 800, function(){
                         $('.pr_page_bt').animate({opacity:1}, 800);
                     });   
@@ -160,6 +161,19 @@ var port = port || (function () {
         },500);
     }
 
+    // web project git
+    function openLink(type, link){
+        var domain = (type == 'code') ? 'https://github.com/oh-hyunji/portfolio-' : 'http://ohhyunji.dothome.co.kr/portfolio/';
+        var url = domain + link;
+
+        if(link == 'ashley' && type !== 'code') {
+            var ashleyLink = (type == 'main') ? 'index.html' : 'menu.html';
+            url = 'http://joeunart.dothome.co.kr/ashley/' + ashleyLink;
+        }
+
+        window.open(url);
+    }
+
 	return {
         seFirstAni : seFirstAni,
         counterFn : counterFn,
@@ -167,7 +181,8 @@ var port = port || (function () {
         seThdAni : seThdAni,
         seFouAni : seFouAni,
         seFivAni : seFivAni,
-        footAni : footAni
+        footAni : footAni,
+        openLink : openLink
 	}
 })();
 
@@ -220,7 +235,7 @@ $(function() {
     });
 
     // animate & cursor
-    $('.he_mail, .navi_box, .fo_top, .document, .pr_pre, .pr_next, .link_box, .fo_gmail, .open_bt, .close_bt').mouseenter(function() {
+    $('.he_mail, .navi_box, .about_bt, .fo_top, .document, .pr_pre, .pr_next, .link_box, .fo_gmail, .open_bt, .close_bt, .end_logo').mouseenter(function() {
         $('#cursor .blob').css({'width':'45px','height':'45px'});
        
         var className = $(this).attr('class').split(' ');
@@ -242,6 +257,16 @@ $(function() {
     }).mouseleave(function(){
         $('#cursor .blob').css({'width':'30px','height':'30px'});
         $('#cursor .blob').css({'background-color':'#ffb924', 'border':'2px solid #ffb734'});
+    });
+
+    $('.about_bt').on('click', function(){
+        var op1=0, op2=1, ab_text='자기소개', src='./img/prImg1.png';
+        if($('.ab_list_box').css('opacity') == '1') op1=1, op2=0, ab_text='이력사항', src='./img/prImg.png';
+
+        $('.ab_self').animate({opacity:op1}, 100);
+        $('.ab_list_box').animate({opacity:op2}, 100);
+        $('.about_text').text('간단한 ' + ab_text + ' 보기');
+        $('.ab_img_box img').attr('src', src);
     });
 
     // web project slide control
@@ -299,36 +324,43 @@ $(function() {
                 src = 'cube';
                 link = 'eYZrpqw';
                 title = 'CUBE<br>ANIMATION';
-                text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
+                text = '정육면체 모양의 큐브가 회전하며<br>늘어나는 애니메이션 입니다.';
                 break;
             case '02':
                 src = 'wave';
                 link = 'XWdqmjy';
                 title = 'WAVE<br>ANIMATION';
-                text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
+                text = '정렬된 여러 점들이 물결 모양으로<br>웨이브하는 애니메이션 입니다.';
                 break;
             case '03':
                 src = 'line';
                 link = 'zYqRgqB';
                 title = 'LINE<br>ANIMATION';
-                text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
+                text = '선들이 가운데를 중점으로 줄었다<br>늘었다 하며 회전하는 애니메이션 입니다.';
                 break;
             case '04':
                 src = 'loding';
                 link = 'yLJbJzW';
                 title = 'LODING<br>ANIMATION';
-                text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
+                text = '로딩하는 느낌을 주기 위해 원 바깥에<br>선과 작은 원을 회전시킨 애니메이션 입니다.';
                 break;
             case '05':
                 type = 'script';
                 src = 'memo';
                 link = 'script-memo';
                 title = 'JQUERY<br>SIMPLE MEMO';
-                text = '빠른 시일 안에 답변 드리겠습니다. 지금까지<br>오현지의 포트폴리오를 방문해 주셔서 감사합니다.';
+                text = '메모를 작성하면 하단에 메모 내용과 날짜,<br>삭제 버튼이 표시되고 삭제도 가능합니다.';
+                break;
+            case '06':
+                type = 'script';
+                src = 'vue';
+                link = 'script-vue';
+                title = 'VUE.JS<br>ENROLLMENT';
+                text = '회원정보 등록 후 등록 정보를 보여주며<br>정보수정 버튼을 통해 재등록이 가능합니다.';
                 break;
         }
 
-        var linkName = (type == 'script') ? 'GIT-HUB' : 'CODE-PEN'
+        var linkName = (type == 'script') ? 'GITHUB' : 'CODEPEN'
 
         $('.la_title').html(title);
         $('.la_text').html(text);
@@ -354,8 +386,6 @@ $(function() {
         $('.iframe').hide();
     });
 });
-
-
 
 window.onload = function () {
     $("html, body").animate({ scrollTop: 0 }, "slow"); 

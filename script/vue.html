@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- stylesheet --> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <style>
+        /* reset */
+        body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select {margin:0; padding:0;}
+        body,input,textarea,select,button,table {font-family: 'Noto Sans KR', sans-serif; font-size:16px;}
+        img,fieldset {border:0;}
+        ul,ol {list-style:none;}
+        em,address {font-style:normal;}
+        a {text-decoration:none;}
+        a:hover,a:active,a:focus {text-decoration:underline;}
+        article,aside,dialog,footer,header,section,footer,nav,figure {display:block; margin:0; padding:0;} /* html5 tags */
+        button {cursor:pointer;}
+
+        /* style */
+        #wrap {width: 100%; position: relative; height: 100vh;}
+
+        #signUp {width: 320px; position: absolute; top: 4%; left: 50%; transform: translateX(-50%);}
+        #signUp h1 {font-size: 18px; padding-bottom: 10px; color: #333;}
+        .input_box {padding: 5px 0;}
+        .input_box label {padding-right: 3px;}
+        .input_box p {display: inline; padding-right: 5px; padding-bottom: 5px;}
+        .submit_bt {background: none; padding: 5px 15px; border: 1px solid #333; border-radius: 5px; font-size: 14px; margin: 10px 0;}
+        .error_box {padding: 5px 0;}
+        .error_box strong {display: block; padding-bottom: 5px; color: #004aff;}
+        .error_box p {font-size: 14px; color: red;}
+        .mem_info {padding-top: 10px;}
+        .info {font-size: 18px;}
+        .mem_info strong {display: block; padding-bottom: 5px; color: #004aff;}
+        .mem_info p {color: #333; padding-bottom: 3px;}
+        .mem_info span {font-style: italic;}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="signUp">
+            <h1><i class="fas fa-user-plus"></i>&nbsp;&nbsp;회원정보 등록 & 수정 [ VUE.js ]</h1>
+            <div class="input_box">
+                <label for="email">이메일</label>
+                <input type="text" id="email" v-model="email" :disabled="validated == 1">
+            </div>
+            <div class="input_box">
+                <label for="pass">비밀번호</label>
+                <input type="password" id="pass" v-model="pass" :disabled="validated == 1">
+            </div>
+            <div class="input_box">
+                <label for="name">이름</label>
+                <input type="text" id="name" v-model="name" :disabled="validated == 1">
+            </div>
+            <div class="input_box">
+                <label for="age">나이</label>
+                <input type="number" id="이름" v-model="age" :disabled="validated == 1">
+            </div>
+            <div class="input_box">
+                <label for="hobby">취미</label>
+                <select v-model="selected" id="hobby" :disabled="validated == 1">
+                    <option v-for="option in options" v-bind:value="option.value">
+                        {{ option.text }}
+                    </option>
+                </select>
+            </div>
+            <div class="input_box">
+                <p>광고 수신 동의</p>
+                <input type="radio" name="agree" id="yes" value="예" v-model="agree" :disabled="validated == 1">
+                <label for="yes">예</label>
+                <input type="radio" name="agree" id="no" value="아니요" v-model="agree" :disabled="validated == 1">
+                <label for="no">아니요</label>
+            </div>
+            <div class="error_box" v-if="errors.length">
+                <strong><i class="far fa-check-circle"></i> 회원정보를 위해 아래 사항을 지켜주세요~</strong>
+                <p>- <span v-for="(error, index) in errors">{{ error }}{{ (index+1 < errors.length) ? ', ' : '' }}</span> 입력란을 입력하세요.</p>
+            </div>
+            <button class="submit_bt" v-on:click="submit" v-model="button">{{ button }}</button>
+            <div class="mem_info" v-if="show">
+                <strong><i class="far fa-user-circle info"></i> 회원정보 출력</strong>
+                <p>- 이메일 : <span>{{ email }}</span></p>
+                <p>- 비밀번호 : <span>{{ pass }}</span></p>
+                <p>- 이름 : <span>{{ name }}</span></p>
+                <p>- 나이 : <span>{{ age }}</span></p>
+                <p>- 취미 : <span>{{ selected }}</span></p>
+                <p>- 광고 동의 : <span>{{ agree }}</span></p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var signUp = new Vue({
+        el: '#signUp',
+        data: {
+            email: null,
+            pass: null,
+            name: null,
+            age: null,
+            selected: 'Exercise',
+            options: [
+                { text: 'Exercise', value: 'Exercise' },
+                { text: 'writing', value: 'writing' },
+                { text: 'Reading', value: 'Reading' }
+            ],
+            agree : '예',
+            show : false,
+            validated : 0,
+            button : '정보등록',
+            errors: []
+        },
+        methods: {
+            submit: function (event) {
+                if(this.email && this.pass && this.name && this.age) {
+                    if(this.validated == 1) {
+                        this.show = false;
+                        this.validated = 0;
+                        this.button = '정보등록';
+                    } else {
+                        this.show = true;
+                        this.validated = 1;
+                        this.button = '정보수정';
+                    }
+                }
+                
+                this.errors = [];
+                if(!this.email) this.errors.push('이메일');
+                if(!this.pass) this.errors.push('비밀번호');
+                if(!this.name) this.errors.push('이름');
+                if(!this.age) this.errors.push('나이');
+            }
+        }
+    })
+</script>
+</html>
