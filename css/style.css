@@ -31,6 +31,17 @@
 .layer_box {width: 40%; height: 75%; background: #fff; position: relative; overflow: hidden;}
 .iframe {position: absolute; width: 100%; height: 100%; overflow-y: hidden; display: none;}
 
+/* borwser layer popup */
+.browser_layer {position: fixed; top: 0; left: 0; background: rgba(0,0,0,.8); width: 100%; height: 100vh; display: none; justify-content: center; align-items: center; z-index: 2;}
+
+.browser_content {width: 70%; height: 80%; background: url(../img/whiteBg.png) no-repeat center / cover; border-radius: 25px; display: flex; justify-content: center; align-items: center;}
+.browser_text {text-align: center;}
+.browser_text strong {display: block; font-weight: bold; font-size: 36px; padding-bottom: 20px;}
+.browser_text strong span {letter-spacing: -0.03em;}
+.browser_text em {display: block; font-size: 20px; line-height: 35px; color: #444;}
+.browser_text em span {color: #fa5f54; font-weight: 500;}
+.browser_text button {padding: 14px 45px; margin-top: 35px; background: #dfdfdf; border: none; color: #444; font-size: 16px;}
+
 /* [header] */
 #header {position: relative; width: 100%; height: 100vh; background: url(../img/whiteBg.png) no-repeat center / cover; background-attachment: fixed;}
 
@@ -127,8 +138,6 @@
 .ab_self .ab_list span {color: #333; padding: 0; font-weight: 500;}
 .ab_self .ab_list .eng {letter-spacing: -0.03em;}
 
-
-
 /* [section2] */
 #section2 {border-top: 1px solid #999;}
 #section2 h2 {padding-top: 70px; font-size: 42px; color: #111; letter-spacing: -0.03em;}
@@ -207,6 +216,7 @@
 .pr_right img {margin-left: 100%;}
 .pr_page_bt {opacity: 0; position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%); display: flex;}
 .pr_page_bt button {padding: 7px 35px; margin: 0 12px; border: 1px solid #333; border-radius: 5px; background: transparent; color: #333; font-weight: bold;}
+.pr_page_bt button:hover {color: #ffb734;}
 .pr_img_text {opacity: 0; position: absolute; bottom: 27%; left: 34%; color: #666;}
 
 /* [section4] */
@@ -272,7 +282,6 @@
 
 .fo_top {width: 100%; height: 10vh; display: flex; align-items: center;}
 .fo_top li {font-size: 16px; width: 100px; color: #333; font-weight: bold; letter-spacing: -0.03em;}
-.fo_top li:nth-child(1):hover {color: #333;}
 .fo_top li:hover {color: #ffb734;}
 
 .fo_contact {width: 100%; height: 80vh; display: flex; justify-content: center; align-items: center;}

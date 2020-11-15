@@ -235,7 +235,7 @@ $(function() {
     });
 
     // animate & cursor
-    $('.he_mail, .navi_box, .about_bt, .fo_top, .document, .pr_pre, .pr_next, .link_box, .fo_gmail, .open_bt, .close_bt, .end_logo').mouseenter(function() {
+    $('.he_mail, .navi_box, .about_bt, .fo_top, .document, .pr_pre, .pr_next, .pr_page_bt, .link_box, .fo_gmail, .open_bt, .close_bt, .end_logo').mouseenter(function() {
         $('#cursor .blob').css({'width':'45px','height':'45px'});
        
         var className = $(this).attr('class').split(' ');
@@ -385,19 +385,33 @@ $(function() {
         $('.layer_pop').hide();
         $('.iframe').hide();
     });
+
+    $('.browser_close').click(function(){
+        $('.browser_layer').css('display','none');
+    });
+
+    // browser check
+    var agent = navigator.userAgent.toLowerCase();
+    if (agent.indexOf("chrome") == -1) {
+        $('html, body').css('cursor','default');
+        $('a, button').css('cursor','pointer');
+        $('#cursor').css('display','none');
+        $('.browser_layer').css('display','flex');
+    }
 });
 
-window.onload = function () {
+window.onload = function(){
     $("html, body").animate({ scrollTop: 0 }, "slow"); 
 
     // snap scroll control
     var elm = ".wheelBox";
-    $(elm).each(function (index) {
+    $(elm).each(function(index){
         // 개별적으로 Wheel 이벤트 적용
-        $(this).on("mousewheel DOMMouseScroll", function (e) {
+        $(this).on("mousewheel DOMMouseScroll", function(e){
             e.preventDefault();
            
             var delta = 0;
+            // console.log(event); WheelEvent {isTrusted: true, deltaX: -0, deltaY: 125, deltaZ: 0, deltaMode: 0, …}
             if (!event) event = window.event;
             if (event.wheelDelta) {
                 delta = event.wheelDelta / 120;
@@ -464,74 +478,5 @@ window.onload = function () {
             $("html,body").stop().animate({scrollTop: moveTop + 'px'}, {duration: 800, complete: function(){}});
         });
     });
-
-
-    /*--------------------
-        Get Mouse
-    --------------------*/
-    let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2, dir: '' };
-    const getMouse = e => {
-        //  e.touches[0].pageX ||, e.touches[0].pageY ||  
-        mouse = {
-            x: e.clientX || e.pageX || 0,
-            y: e.clientY || e.pageX || 0,
-            dir: getMouse.x > e.clientX ? 'left' : 'right' 
-        };
-
-    };
-    ['mousemove', 'touchstart', 'touchmove'].forEach(e => {window.addEventListener(e, getMouse);});
-
-    /*--------------------
-        Mouse Follow
-    --------------------*/
-    class MouseFollow {
-        constructor(options) {
-            Object.assign(this, options);
-
-            this.pos = {
-                x: 0,
-                y: 0 
-            };
-        }
-
-        follow() {
-            this.distX = mouse.x - this.pos.x;
-            this.distY = mouse.y - this.pos.y;
-
-            this.velX = Math.abs(this.distX / 8);
-            this.velY = Math.abs(this.distY / 8);
-
-            this.pos.x += this.distX / (10 + this.ind * gooey);
-            this.pos.y += this.distY / (10 + this.ind * gooey);
-
-            this.scaleX = 1; //map(this.velX, 0, 100, 1, 2);
-            this.scaleY = 1; // map(this.velY, 0, 100, 1, 2);
-
-            this.el.style.transform = 'translate(' + this.pos.x + 'px, ' + this.pos.y + 'px) scale(' + Math.max(this.scaleX, this.scaleY) + ')';
-        }
-    }
-
-    /*--------------------
-        Map
-    --------------------*/
-    function map(num, in_min, in_max, out_min, out_max) {
-        return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-    }
-
-    /*--------------------
-        Init
-    --------------------*/
-    const gooey = 0.5;
-    const blobs = Array.from(document.querySelectorAll('#cursor .blob'));
-    const blobFollows = blobs.map((e, i) => new MouseFollow({ el: e, ind: i }));
-
-    /*--------------------
-        Render
-    --------------------*/
-    const render = () => {
-        requestAnimationFrame(render);
-        blobFollows.forEach(e => e.follow());
-    };
-    render();
 }
 
