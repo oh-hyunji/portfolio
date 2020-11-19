@@ -56,14 +56,14 @@ var port = port || (function () {
 
     // section1 animate
     function seFirstAni() {
-        $('.ab_style').animate({opacity:1}, 2000, function(){
+        $('.ab_style').animate({opacity:1}, 1500, function(){
             $('.ab_style').addClass('ab_style_ani');
             $('.ab_content').animate({opacity:1}, 500);   
             $('#section1 h2').animate({opacity:1}, 500);
         });
     }
 
-    var cnt = 25;
+    var cnt = 30;
     // section2 counter
     function counterFn(){
         var counterUp = setInterval(counterUp, 50);
@@ -111,8 +111,8 @@ var port = port || (function () {
     // section4 animate
     function seFouAni(){
         setTimeout(function(){
-            $('#section4 h2').animate({opacity:1}, 1000, function(){
-                $('#section4 .sa_text').animate({opacity:1}, 1000, function(){
+            $('#section4 h2').animate({opacity:1}, 800, function(){
+                $('#section4 .sa_text').animate({opacity:1}, 800, function(){
                     $('.sa_content').animate({opacity:1}, 800);   
                 });   
             });   
@@ -124,18 +124,18 @@ var port = port || (function () {
     function seFivAni(){
         if(fivAniShow == true) return;
         setTimeout(function(){
-            $('.re_box:nth-child(1) .re_text').animate({opacity:1}, 1000);
-            $('.center_line').animate({width:'25%'}, 1000, function(){
-                $('.re_box:nth-child(2) .re_text').animate({opacity:1}, 1000);
-                $('.center_line').animate({width:'75%'}, 1000, function(){
-                    $('.re_box:nth-child(4) .re_text').animate({opacity:1}, 1000);
-                    $('.center_line').animate({width:'100%'}, 1000, function(){
-                        $('.re_box:nth-child(5) .re_text').animate({opacity:1}, 1000, function(){
+            $('.re_box:nth-child(1) .re_text').animate({opacity:1}, 800);
+            $('.center_line').animate({width:'25%'}, 800, function(){
+                $('.re_box:nth-child(2) .re_text').animate({opacity:1}, 800);
+                $('.center_line').animate({width:'75%'}, 800, function(){
+                    $('.re_box:nth-child(4) .re_text').animate({opacity:1}, 800);
+                    $('.center_line').animate({width:'100%'}, 800, function(){
+                        $('.re_box:nth-child(5) .re_text').animate({opacity:1}, 800, function(){
                             $('.document').animate({opacity:1}, 1000, function(){
-                                $('.re_box:nth-child(3) .re_text').animate({opacity:1}, 1000);
-                                $('.re_ceText strong').animate({opacity:1}, 1000, function(){
+                                $('.re_box:nth-child(3) .re_text').animate({opacity:1}, 800);
+                                $('.re_ceText strong').animate({opacity:1}, 800, function(){
                                     fivAniShow = true;
-                                    $('.re_ceText p').animate({opacity:1}, 1000);
+                                    $('.re_ceText p').animate({opacity:1}, 800);
                                     $('.re_style').animate({right:'4%'}, 1200);
                                     $('.document').addClass('document_ani');
                                 });
