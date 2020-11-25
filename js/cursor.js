@@ -12,8 +12,8 @@ $(function(){
             y: e.clientY || e.pageX || 0,
             dir: getMouse.x > e.clientX ? 'left' : 'right' 
         };
-
     };
+    
     ['mousemove', 'touchstart', 'touchmove'].forEach(e => {window.addEventListener(e, getMouse);});
 
     /*--------------------

@@ -125,9 +125,9 @@ var port = port || (function () {
         if(fivAniShow == true) return;
         setTimeout(function(){
             $('.re_box:nth-child(1) .re_text').animate({opacity:1}, 800);
-            $('.center_line').animate({width:'25%'}, 800, function(){
+            $('.center_line').animate({width:'33%'}, 800, function(){
                 $('.re_box:nth-child(2) .re_text').animate({opacity:1}, 800);
-                $('.center_line').animate({width:'75%'}, 800, function(){
+                $('.center_line').animate({width:'70%'}, 800, function(){
                     $('.re_box:nth-child(4) .re_text').animate({opacity:1}, 800);
                     $('.center_line').animate({width:'100%'}, 800, function(){
                         $('.re_box:nth-child(5) .re_text').animate({opacity:1}, 800, function(){
@@ -144,7 +144,7 @@ var port = port || (function () {
                     });
                 });
             });
-        },1000);
+        }, 1000);
     }
 
     // footer animate
@@ -392,11 +392,20 @@ $(function() {
 
     // browser check
     var agent = navigator.userAgent.toLowerCase();
-    if (agent.indexOf("chrome") == -1) {
+    if((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)){
         $('html, body').css('cursor','default');
         $('a, button').css('cursor','pointer');
         $('#cursor').css('display','none');
-        $('.browser_layer').css('display','flex');
+        //$('.browser_layer').css('display','flex');
+    } else {
+        var successCallback = function() {
+            console.log('success');
+        },
+        failCallback = function() {
+            console.log( 'Failed to load Velocity.js.' );
+        };
+        // IE 제외 브라우저에 cursor.js 로드
+        $.getScript('http://ohhyunji.dothome.co.kr/portfolio/ohhyunji/js/cursor.js').done(successCallback).fail(failCallback);
     }
 });
 
