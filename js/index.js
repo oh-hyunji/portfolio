@@ -96,7 +96,7 @@ var port = port || (function () {
     // section3 animate
     function seThdAni(){
         setTimeout(function(){
-            $('.pr_left').animate({opacity:1}, 1000, function(){
+            $('.pr_left').animate({opacity:1}, 500, function(){
                 $('.pr_style').addClass('pr_style_ani');
                 $('.pr_right img').animate({'margin-left':0}, 1200, function(){
                     $('.pr_img_text').animate({opacity:1}, 800);
@@ -105,7 +105,7 @@ var port = port || (function () {
                     });   
                 });   
             });   
-        },500);
+        },300);
     }
 
     // section4 animate
@@ -189,49 +189,9 @@ var port = port || (function () {
 $(function() {
     // menu click event
     $('.side_menu li').on('click', function(){
-        var $this = $(this);
-        var index = $this.index();
-
-        $('.side_menu li').removeClass('on');
-        $('.icon').removeClass('fill');
-        
-        var tagId;
-        switch(index){
-            case 0:
-                tagId = '#header';
-                $('.icon').addClass('fill');
-                break;
-            case 1:
-                tagId = '#section1';
-                port.seFirstAni();
-                break;
-            case 2:
-                tagId = '#section2';
-                port.counterFn();
-                port.graphUp();
-                break;
-            case 3:
-                tagId = '#section3';
-                port.seThdAni();
-                break;
-            case 4:
-                tagId = '#section4';
-                port.seFouAni();
-                break;
-            case 5:
-                tagId = '#section5';
-                port.seFivAni();
-                break;
-            case 6:
-                tagId = '#footer';
-                port.footAni();
-                break;
-        }
-
-        if(index > 0) $('.side_menu li').eq(index).addClass('on');
-
-        var offset = $(tagId).offset();
-        $('html, body').animate({scrollTop : offset.top}, 400);
+        var index = $(this).index();
+        var hashPage = '#' + (index+1) + 'Page';
+        window.location.hash = hashPage;
     });
 
     // animate & cursor
@@ -407,85 +367,53 @@ $(function() {
         // IE 제외 브라우저에 cursor.js 로드
         $.getScript('http://ohhyunji.dothome.co.kr/portfolio/ohhyunji/js/cursor.js').done(successCallback).fail(failCallback);
     }
-});
 
-window.onload = function(){
-    $("html, body").animate({ scrollTop: 0 }, "slow"); 
-
-    // snap scroll control
-    var elm = ".wheelBox";
-    $(elm).each(function(index){
-        // 개별적으로 Wheel 이벤트 적용
-        $(this).on("mousewheel DOMMouseScroll", function(e){
-            e.preventDefault();
-           
-            var delta = 0;
-            // console.log(event); WheelEvent {isTrusted: true, deltaX: -0, deltaY: 125, deltaZ: 0, deltaMode: 0, …}
-            if (!event) event = window.event;
-            if (event.wheelDelta) {
-                delta = event.wheelDelta / 120;
-                if (window.opera) delta = -delta;
-            } 
-            else if (event.detail) delta = -event.detail / 3;
-           
-            var moveTop = $(window).scrollTop();
-            var elmSelecter = $(elm).eq(index);
-            var selectId;
-           
-            if (delta < 0) { // 마우스휠을 위에서 아래로
-                if ($(elmSelecter).next() != undefined) {
-                    try{
-                        moveTop = $(elmSelecter).next().offset().top;
-                        selectId = $(elmSelecter).next().attr('id');
-                    }catch(e){}
-                }
-            } else { // 마우스휠을 아래에서 위로
-                if ($(elmSelecter).prev() != undefined) {
-                    try{
-                        moveTop = $(elmSelecter).prev().offset().top;
-                        selectId = $(elmSelecter).prev().attr('id');
-                    }catch(e){}
-                }
-            }
-
-            if(selectId) {
+    // fullpage.js
+    $('#wrap').fullpage({
+        anchors: ['1Page', '2Page', '3Page', '4Page', '5Page', '6Page', '7Page'],
+        autoScrolling:true,
+        scrollingSpeed: 800,
+        css3:false,
+        afterLoad: function(origin, destination, diretion){
+            if(origin !== '1page') {
                 $('.side_menu li').removeClass('on');
                 $('.icon').removeClass('fill');
             }
-            switch(selectId){
-                case 'header':
+            switch(origin){
+                case '1Page':
                     $('.icon').addClass('fill');
                     break;
-                case 'section1':
+                case '2Page':
                     $('.side_menu li').eq(1).addClass('on');
                     port.seFirstAni();
                     break;
-                case 'section2':
+                case '3Page':
                     $('.side_menu li').eq(2).addClass('on');
                     port.counterFn();
                     port.graphUp();
                     break;
-                case 'section3':
+                case '4Page':
                     $('.side_menu li').eq(3).addClass('on');
                     port.seThdAni();
                     break;
-                case 'section4':
+                case '5Page':
                     $('.side_menu li').eq(4).addClass('on');
                     port.seFouAni();
                     break;
-                case 'section5':
+                case '6Page':
                     $('.side_menu li').eq(5).addClass('on');
                     port.seFivAni();
                     break;
-                case 'footer':
+                case '7Page':
                     $('.side_menu li').eq(6).addClass('on');
                     port.footAni();
                     break;
             }
-             
-            // 화면 이동 0.8초(800)
-            $("html,body").stop().animate({scrollTop: moveTop + 'px'}, {duration: 800, complete: function(){}});
-        });
+        }
     });
+});
+
+window.onload = function(){
+    window.location.hash = '#1Page';
 }
 
