@@ -220,13 +220,14 @@ $(function() {
     });
 
     $('.about_bt').on('click', function(){
-        var op1=0, op2=1, ab_text='자기소개', src='./img/prImg1.png';
-        if($('.ab_list_box').css('opacity') == '1') op1=1, op2=0, ab_text='이력사항', src='./img/prImg.png';
+        var op1=0, op2=1, ab_text='자기소개', src='./img/prImg1.png', align_items='inherit';
+        if($('.ab_list_box').css('opacity') == '1') op1=1, op2=0, ab_text='이력사항', src='./img/prImg.png', align_items='center';
 
         $('.ab_self').animate({opacity:op1}, 100);
         $('.ab_list_box').animate({opacity:op2}, 100);
         $('.about_text').text('간단한 ' + ab_text + ' 보기');
         $('.ab_img_box img').attr('src', src);
+        $('.ab_content').css({'align-items':align_items});
     });
 
     // web project slide control
