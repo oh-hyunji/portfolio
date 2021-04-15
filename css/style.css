@@ -130,12 +130,12 @@
 .ab_list:last-child p:last-child {padding-bottom: 0;}
 .ab_list:nth-child(1) span, .ab_list:nth-child(2) span {padding-left: 10px;}
 
-.ab_title {display: flex; align-items: center; padding-bottom: 15px;}
+.ab_title {display: flex; align-items: center; padding-bottom: 18px;}
 .ab_title .check {width: 30px;}
 .ab_title strong {font-size: 28px; color: #333; letter-spacing: -0.03em; padding-left: 3px;}
 
-.ab_self .ab_title strong {font-weight: 600; letter-spacing: -0.1em;}
-.ab_self .ab_list p {font-size: 18px; letter-spacing: -0.03em; line-height: 30px;}
+.ab_self .ab_title strong {font-weight: 600; letter-spacing: -0.1em; line-height: 45px;}
+.ab_self .ab_list p {font-size: 18px; letter-spacing: -0.03em; line-height: 32px;}
 .ab_self .ab_list span {color: #333; padding: 0; font-weight: 500;}
 .ab_self .ab_list .eng {letter-spacing: -0.03em;}
 
