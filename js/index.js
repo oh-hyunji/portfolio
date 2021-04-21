@@ -3,7 +3,6 @@ var port = port || (function () {
     var typingBool = false; 
     var typingIdx = 0; 
     var liIndex = 0;
-    
     var textArr = ['MY:)', 'PORTFOLIO']
     var arrLenth = 2;
     var typingTxt = textArr[liIndex]; 
@@ -15,7 +14,7 @@ var port = port || (function () {
         var tyInt = setInterval(typing,150); 
     } 
 
-	function typing(){
+    function typing(){
         $(".title_box h1").removeClass("on");
         $(".title_box h1").eq(liIndex).addClass("on");
     
@@ -259,7 +258,7 @@ $(function() {
             alert('다음 프로젝트가 없습니다.');
             return;
         }
-       
+
         $(page1).removeClass('pa_on');
         $(page2).addClass('pa_on');
 
@@ -336,7 +335,7 @@ $(function() {
 
     $('.open_bt').on('click', function(e){
         e.stopPropagation();
-       
+    
         var host = (type == 'script') ? 'https://github.com/oh-hyunji/' : 'https://codepen.io/oh-hyunji/pen/';
         var url = host + link;
         window.open(url);
